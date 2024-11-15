@@ -75,5 +75,4 @@ Se você leu até aqui, parabéns! Aceitamos **issues**, **pull requests** e elo
 
 ---
 
-Obrigado por explorar o **InvokerAPI**. E lembre-se: se algo der errado, culpe o suporte. Ou o Invoker.
-
+Obrigado por explorar o **InvokerAPI**. E lembre-se: se algo der errado, culpe o suporte.
