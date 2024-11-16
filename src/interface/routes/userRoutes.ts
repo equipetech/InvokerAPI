@@ -30,7 +30,7 @@ const asyncHandler = (fn: (req: Request, res: Response, next: NextFunction) => P
  *               items:
  *                 $ref: '#/components/schemas/User'
  */
-router.get('/users', authMiddleware, asyncHandler((req: Request, res: Response, next: NextFunction) => userController.getAllUsers(req, res, next)));
+// router.get('/users', authMiddleware, asyncHandler((req: Request, res: Response, next: NextFunction) => userController.getAllUsers(req, res, next)));
 
 /**
  * @swagger
@@ -45,7 +45,14 @@ router.get('/users', authMiddleware, asyncHandler((req: Request, res: Response, 
  *             $ref: '#/components/schemas/User'
  *           example:
  *             email: "user@example.com"
- *             senha_hash: "SenhaForte123!"
+ *             senha: "SenhaForte123!"
+ *     responses:
+ *       201:
+ *         description: Usuário criado com sucesso
+ *       400:
+ *         description: Entrada inválida
+ *       500:
+ *         description: Erro interno do servidor
  */
 router.post('/users', asyncHandler((req: Request, res: Response, next: NextFunction) => userController.createUser(req, res, next)));
 
@@ -74,4 +81,5 @@ router.post('/users', asyncHandler((req: Request, res: Response, next: NextFunct
  *         description: Erro interno do servidor
  */
 router.post('/login', asyncHandler((req: Request, res: Response, next: NextFunction) => userController.login(req, res, next)));
+
 export default router;

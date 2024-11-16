@@ -11,7 +11,7 @@ const ses = new SESClient({
 });
 
 // Função para enviar o e-mail de boas-vindas
-export async function sendWelcomeEmail(recipientEmail: string, recipientName: string) {
+export async function sendWelcomeEmail(recipientEmail: string) {
   const command = new SendTemplatedEmailCommand({
     Source: process.env.SES_FROM_EMAIL!, // E-mail verificado no SES
     Destination: {
@@ -20,7 +20,6 @@ export async function sendWelcomeEmail(recipientEmail: string, recipientName: st
     Template: 'NagaleraWaitlist', // Nome do template SES
     TemplateData: JSON.stringify({
       email: recipientEmail,
-      nome: recipientName,
     }),
   });
 
