@@ -17,13 +17,13 @@ export class UserEntity {
   @Column({ nullable: true })
   biografia?: string;
 
-  @Column({ type: 'point', nullable: true })
+  @Column({ type: 'point', nullable: true }) 
   localizacao?: string | null;
-
 
   @Column({ nullable: true })
   avatar_url?: string;
+  
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   criado_em!: Date;
-} 
+}
