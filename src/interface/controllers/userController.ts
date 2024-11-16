@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { UserService } from '../../application/services/userService';
 import jwt from 'jsonwebtoken';
+import { sendWelcomeEmail } from '../../application/services/emailService'; 
 
 function isValidEmail(email: string): boolean {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -20,7 +21,7 @@ export class UserController {
   }
 
   async createUser(req: Request, res: Response, next: NextFunction): Promise<void> {
-    const { email, senha_hash } = req.body;
+    const { email, nome, senha_hash } = req.body;
 
     if (!email || !senha_hash) {
       return next(new Error('Email e senha são obrigatórios, mas aparentemente você esqueceu de fornecer.'));
@@ -35,7 +36,11 @@ export class UserController {
     }
 
     try {
+      // Cadastrar o usuário usando o serviço
       await this.userService.createUser(email, senha_hash);
+
+      await sendWelcomeEmail(email, nome || 'Usuário');
+
       res.status(201).json({ message: 'Usuário criado com sucesso. Parabéns, você fez uma coisa funcionar!' });
     } catch (error) {
       console.error('Erro em createUser:', error);
@@ -57,30 +62,29 @@ export class UserController {
     const { email, senha } = req.body;
 
     if (!email || !senha) {
-        res.status(400).json({ message: 'Email e senha são obrigatórios.' });
-        return;
+      res.status(400).json({ message: 'Email e senha são obrigatórios.' });
+      return;
     }
 
     try {
-        const user = await this.userService.verifyUser(email, senha);
+      const user = await this.userService.verifyUser(email, senha);
 
-        if (!user) {
-            res.status(401).json({ message: 'Credenciais inválidas.' });
-            return;
-        }
+      if (!user) {
+        res.status(401).json({ message: 'Credenciais inválidas.' });
+        return;
+      }
 
-        if (!process.env.JWT_SECRET) {
-            console.error('JWT secret is not configured.');
-            res.status(500).json({ message: 'Erro de configuração do servidor.' });
-            return;
-        }
+      if (!process.env.JWT_SECRET) {
+        console.error('JWT secret is not configured.');
+        res.status(500).json({ message: 'Erro de configuração do servidor.' });
+        return;
+      }
 
-        const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.status(200).json({ token });
+      const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
+      res.status(200).json({ token });
     } catch (error) {
-        console.error('Erro em login:', error);
-        res.status(500).json({ message: 'Erro interno do servidor.' });
+      console.error('Erro em login:', error);
+      res.status(500).json({ message: 'Erro interno do servidor.' });
     }
-}
-
+  }
 }
