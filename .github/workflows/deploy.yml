@@ -1,0 +1,37 @@
+name: Deploy Docker App to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # Executa o deploy sempre que houver push na branch main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Fazer o Checkout do Repositório
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # 2. Logar no Docker Hub (opcional, para usar imagens do Docker Hub)
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      # 3. Construir a Imagem Docker
+      - name: Build Docker Image
+        run: docker build -t my-docker-app .
+
+      # 4. Rodar o Container Docker (localmente no ambiente do GitHub Actions)
+      - name: Run Docker Container
+        run: docker run -d -p 8080:80 --name app-container my-docker-app
+
+      # 5. Publicar no GitHub Pages (se aplicável)
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
