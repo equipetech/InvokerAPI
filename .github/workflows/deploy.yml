@@ -1,36 +1,37 @@
-name: Deploy to GitHub Pages
+name: Deploy Docker App to GitHub Pages
 
 on:
   push:
     branches:
-      - main  # O workflow será executado quando houver um push na branch "main"
+      - main # Executa o deploy sempre que houver push na branch main
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout do repositório
-      - name: Checkout repository
+      # 1. Fazer o Checkout do Repositório
+      - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # Step 2: Configuração do Node.js
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      # 2. Logar no Docker Hub (opcional, para usar imagens do Docker Hub)
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
         with:
-          node-version: '16'  # Use a versão do Node.js necessária para o projeto
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
-      # Step 3: Instalar dependências
-      - name: Install dependencies
-        run: npm install
+      # 3. Construir a Imagem Docker
+      - name: Build Docker Image
+        run: docker build -t my-docker-app .
 
-      # Step 4: Gerar arquivos estáticos (ajuste conforme o seu projeto)
-      - name: Build static files
-        run: npm run build:swagger  # Certifique-se de que esse script está configurado no package.json
+      # 4. Rodar o Container Docker (localmente no ambiente do GitHub Actions)
+      - name: Run Docker Container
+        run: docker run -d -p 8080:80 --name app-container my-docker-app
 
-      # Step 5: Deploy para o GitHub Pages
+      # 5. Publicar no GitHub Pages (se aplicável)
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./static  # Diretório gerado pelos arquivos estáticos
+          publish_dir: ./public
