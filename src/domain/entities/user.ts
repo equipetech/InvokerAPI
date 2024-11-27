@@ -7,6 +7,7 @@ export class User {
     public biografia: string = '',
     public localizacao: string | null = null, 
     public avatar_url: string = '',
+    public telefone: string = '', 
     public criado_em?: Date
   ) {}
 }

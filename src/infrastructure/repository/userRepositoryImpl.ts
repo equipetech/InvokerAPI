@@ -15,6 +15,7 @@ export class UserRepositoryImpl implements UserRepository {
       user.biografia,
       user.localizacao,
       user.avatar_url,
+      user.telefone, 
       user.criado_em
     ));
   }
@@ -31,6 +32,7 @@ export class UserRepositoryImpl implements UserRepository {
       user.biografia,
       user.localizacao,
       user.avatar_url,
+      user.telefone, 
       user.criado_em
     );
   }
@@ -47,6 +49,7 @@ export class UserRepositoryImpl implements UserRepository {
       user.biografia,
       user.localizacao,
       user.avatar_url,
+      user.telefone, 
       user.criado_em
     );
   }
@@ -62,6 +65,7 @@ export class UserRepositoryImpl implements UserRepository {
     userEntity.biografia = user.biografia;
     userEntity.localizacao = user.localizacao || null; 
     userEntity.avatar_url = user.avatar_url;
+    userEntity.telefone = user.telefone; 
     userEntity.criado_em = user.criado_em ?? new Date();
 
     await repository.save(userEntity);

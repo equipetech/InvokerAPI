@@ -21,8 +21,8 @@ app.use(express.json());
 setupSwagger(app);
 
 // Registrar as rotas com o prefixo /api
+// Registrar as rotas com o prefixo /api
 app.use('/api', userRoutes);
-
 // Inicializar o DataSource e iniciar o servidor
 AppDataSource.initialize()
   .then(() => {

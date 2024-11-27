@@ -22,7 +22,9 @@ export class UserEntity {
 
   @Column({ nullable: true })
   avatar_url?: string;
-  
+
+  @Column()
+  telefone!: string; 
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   criado_em!: Date;

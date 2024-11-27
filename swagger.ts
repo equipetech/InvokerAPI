@@ -11,6 +11,13 @@ const options = {
       description: 'API documentation for InvokerAPI',
     },
     components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        },
+      },
       schemas: {
         User: {
           type: 'object',
@@ -21,7 +28,7 @@ const options = {
             },
             nome: {
               type: 'string',
-              nullable: true, 
+              nullable: true,
             },
             email: {
               type: 'string',
@@ -48,12 +55,39 @@ const options = {
               nullable: true,
             },
           },
-          required: ['email', 'senha_hash'], 
+          required: ['email', 'senha_hash'],
+        },
+        UserProfile: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'string',
+            },
+            nome: {
+              type: 'string',
+            },
+            email: {
+              type: 'string',
+            },
+            telefone: {
+              type: 'string',
+            },
+            localizacao: {
+              type: 'string',
+            },
+          },
+          example: {
+            id: "123e4567-e89b-12d3-a456-426614174000",
+            nome: "John Doe",
+            email: "user@example.com",
+            telefone: "(11) 98765-4321",
+            localizacao: "São Paulo, SP",
+          },
         },
       },
     },
   },
-  apis: ['./src/interface/routes/*.ts'], 
+  apis: ['./src/interface/routes/*.ts'],
 };
 
 const swaggerSpec = swaggerJSDoc(options);
