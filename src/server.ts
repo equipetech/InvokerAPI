@@ -30,8 +30,8 @@ AppDataSource.initialize()
 
     // Iniciar o servidor após a inicialização do banco de dados
     app.listen(PORT, '0.0.0.0', () => {
-      console.log(`Server running on http://44.201.90.181:${PORT}`);
-      console.log(`Swagger docs available at http://44.201.90.181:${PORT}/api-docs`);
+      console.log(`Server running on http://98.85.165.251:${PORT}`);
+      console.log(`Swagger docs available at http://98.85.165.251:${PORT}/api-docs`);
     });
   })
   .catch((error) => {
