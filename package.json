@@ -10,10 +10,10 @@
     "start": "node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "typeorm": "ts-node ./node_modules/typeorm/cli.js",
-    "typeorm:migrate": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run -d ./ormconfig.ts",
+    "typeorm:migrate": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run -d dist/ormconfig.js",
     "typeorm:create": "npx ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:create -d ./ormconfig.ts",
     "typeorm:generate": "npx ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:generate -d ./ormconfig.ts",
-    "typeorm:migrate:revert": "npx ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:revert -d ./ormconfig.ts"
+    "typeorm:migrate:revert": "npx ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:revert -d dist/ormconfig.js"
   },
   "keywords": [],
   "author": "",

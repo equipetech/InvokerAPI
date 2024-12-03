@@ -1,8 +1,7 @@
 import { UserRepository } from '../../domain/ports/userRepository';
 import { User } from '../../domain/entities/user';
-import { AppDataSource } from '../../../ormconfig';
 import { UserEntity } from '../../infrastructure/database/entities/userEntity';
-
+import { AppDataSource } from '../../ormconfig';
 export class UserRepositoryImpl implements UserRepository {
   async findAll(): Promise<User[]> {
     const repository = AppDataSource.getRepository(UserEntity);

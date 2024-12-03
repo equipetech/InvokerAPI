@@ -1,8 +1,8 @@
 import express from 'express';
 import userRoutes from './interface/routes/userRoutes';
 import 'reflect-metadata';
-import { setupSwagger } from '../swagger';
-import { AppDataSource } from '../ormconfig';
+import { setupSwagger } from './swagger';
+import { AppDataSource } from './ormconfig';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
