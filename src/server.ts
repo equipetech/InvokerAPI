@@ -24,6 +24,10 @@ setupSwagger(app);
 // Registrar as rotas com o prefixo /api
 app.use('/api', userRoutes);
 // Inicializar o DataSource e iniciar o servidor
+app.get('/', (req, res) => {
+  res.send('API is running!');
+});
+
 AppDataSource.initialize()
   .then(() => {
     console.log('Data Source initialized successfully');
