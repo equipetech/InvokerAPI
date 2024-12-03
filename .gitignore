@@ -23,6 +23,7 @@ node_modules/
 
 # dotenv environment variables file
 .env
+.pem
 
 # TypeScript
 *.tsbuildinfo
