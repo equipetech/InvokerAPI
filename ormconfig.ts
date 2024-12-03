@@ -16,4 +16,7 @@ export const AppDataSource = new DataSource({
   entities: [UserEntity], // Entidades do TypeORM
   migrations: ['src/migration/*.ts'], // Caminho para migrações
   subscribers: [], // Inscritos (subscribers), se houver algum
+  ssl: {
+    rejectUnauthorized: true, // Garante que a conexão seja segura
+  },
 });

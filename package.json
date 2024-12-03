@@ -4,8 +4,10 @@
   "description": "Ah, o **InvokerAPI**. Inspirado no mago mais complexo (e irritante) de Dota 2, este backend não lança bolas de fogo ou invoca espíritos, mas tenta ser igualmente impressionante. Uma API poderosa e versátil que pode (com sorte) lidar com todas as suas necessidades – desde criar usuários até questionar suas escolhas de vida.",
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
     "predev": "ts-node ./src/utils/initDatabase.ts",
     "dev": "ts-node-dev src/server.ts",
+    "start": "node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "typeorm": "ts-node ./node_modules/typeorm/cli.js",
     "typeorm:migrate": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run -d ./ormconfig.ts",
