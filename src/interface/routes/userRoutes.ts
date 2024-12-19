@@ -17,7 +17,7 @@ const asyncHandler = (fn: (req: Request, res: Response, next: NextFunction) => P
 
 /**
  * @swagger
- * /api/users:
+ * /v1/users:
  *   post:
  *     summary: Cria um novo usuário
  *     requestBody:
@@ -43,7 +43,7 @@ router.post('/users', asyncHandler((req: Request, res: Response, next: NextFunct
 
 /**
  * @swagger
- * /api/login:
+ * /v1/login:
  *   post:
  *     summary: Faz login de um usuário
  *     requestBody:
@@ -69,7 +69,7 @@ router.post('/login', asyncHandler((req: Request, res: Response, next: NextFunct
 
 /**
  * @swagger
- * /api/change-password:
+ * /v1/change-password:
  *   post:
  *     summary: Altera a senha do usuário logado
  *     security:
@@ -102,7 +102,7 @@ router.post('/change-password', authMiddleware, asyncHandler((req: Request, res:
 
 /**
  * @swagger
- * /api/send-password-reset-token:
+ * /v1/send-password-reset-token:
  *   post:
  *     summary: Envia um token de recuperação de senha para o email do usuário
  *     requestBody:
@@ -128,7 +128,7 @@ router.post('/send-password-reset-token', asyncHandler((req: Request, res: Respo
 
 /**
  * @swagger
- * /api/reset-password:
+ * /v1/reset-password:
  *   post:
  *     summary: Altera a senha do usuário usando o token de recuperação
  *     requestBody:
@@ -156,7 +156,7 @@ router.post('/send-password-reset-token', asyncHandler((req: Request, res: Respo
 router.post('/reset-password', asyncHandler((req: Request, res: Response, next: NextFunction) => userController.resetPassword(req, res, next)));
 /**
  * @swagger
- * /api/me:
+ * /v1/me:
  *   get:
  *     summary: Retorna os dados do usuário logado
  *     security:
