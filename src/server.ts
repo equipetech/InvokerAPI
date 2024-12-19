@@ -24,14 +24,18 @@ setupSwagger(app);
 // Registrar as rotas com o prefixo /api
 app.use('/api', userRoutes);
 // Inicializar o DataSource e iniciar o servidor
+app.get('/', (req, res) => {
+  res.send('API is running!');
+});
+
 AppDataSource.initialize()
   .then(() => {
     console.log('Data Source initialized successfully');
 
     // Iniciar o servidor após a inicialização do banco de dados
     app.listen(PORT, '0.0.0.0', () => {
-      console.log(`Server running on http://44.201.90.181:${PORT}`);
-      console.log(`Swagger docs available at http://44.201.90.181:${PORT}/v1`);
+      console.log(`Server running on http://98.85.165.251:${PORT}`);
+      console.log(`Swagger docs available at http://98.85.165.251:${PORT}/v1`);
     });
   })
   .catch((error) => {
