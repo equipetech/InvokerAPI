@@ -5,6 +5,8 @@ import { setupSwagger } from './swagger';
 import { AppDataSource } from './ormconfig';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import swaggerJsdoc from 'swagger-jsdoc';
+
 
 dotenv.config();
 
@@ -20,9 +22,10 @@ app.use(express.json());
 // Configurar Swagger
 setupSwagger(app);
 
-// Registrar as rotas com o prefixo /api
-// Registrar as rotas com o prefixo /api
-app.use('/v1', userRoutes);
+app.use('/v1', userRoutes); // Rotas reais da API
+setupSwagger(app); // Configura Swagger em `/v1/docs`
+
+
 // Inicializar o DataSource e iniciar o servidor
 app.get('/', (req, res) => {
   res.send('API is running!');
